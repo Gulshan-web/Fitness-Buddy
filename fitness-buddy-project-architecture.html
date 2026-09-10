@@ -1,0 +1,317 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Fitness Buddy Architecture</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#0d0d0d;color:#f0f0f0;font-size:14px;line-height:1.6;padding:32px 20px 60px}
+  h1{font-size:1.6rem;font-weight:800;text-align:center;margin-bottom:4px;background:linear-gradient(135deg,#fff 30%,#f87171 70%,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .subtitle{text-align:center;color:#737373;font-size:0.85rem;margin-bottom:36px}
+  /* ── LAYER BOXES ── */
+  .arch{display:flex;flex-direction:column;gap:20px;max-width:900px;margin:0 auto}
+  .layer{border-radius:12px;padding:20px 22px;border:1px solid}
+  .layer-title{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .layer-title span{opacity:0.6}
+
+  /* Browser layer */
+  .l-browser{background:#1a1010;border-color:#dc2626}
+  .l-browser .layer-title{color:#f87171}
+
+  /* Server layer */
+  .l-server{background:#0d1a0d;border-color:#16a34a}
+  .l-server .layer-title{color:#4ade80}
+
+  /* IBM layer */
+  .l-ibm{background:#0d0d1a;border-color:#6366f1}
+  .l-ibm .layer-title{color:#818cf8}
+
+  /* Storage layer */
+  .l-storage{background:#1a1a0d;border-color:#ca8a04}
+  .l-storage .layer-title{color:#fbbf24}
+
+  /* File cards grid */
+  .files-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .file-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:14px}
+  .file-name{font-size:0.82rem;font-weight:700;font-family:"Courier New",monospace;margin-bottom:6px}
+  .file-desc{font-size:0.78rem;color:#a3a3a3;margin-bottom:8px}
+  .file-lines{font-size:0.72rem;color:#525252;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;margin-top:6px}
+  .tag{display:inline-block;font-size:0.68rem;font-weight:600;padding:2px 7px;border-radius:10px;margin-bottom:6px}
+  .tag-html{background:rgba(234,88,12,0.2);color:#fb923c}
+  .tag-css{background:rgba(139,92,246,0.2);color:#a78bfa}
+  .tag-js{background:rgba(234,179,8,0.2);color:#fbbf24}
+  .tag-py{background:rgba(22,163,74,0.2);color:#4ade80}
+  .tag-env{background:rgba(220,38,38,0.2);color:#f87171}
+  .tag-txt{background:rgba(99,102,241,0.15);color:#818cf8}
+
+  /* Arrow */
+  .arrow-row{display:flex;align-items:center;justify-content:center;gap:0;margin:-6px 0}
+  .arrow-line{width:2px;height:28px;background:linear-gradient(to bottom,transparent,#555,transparent);margin:0 auto}
+  .arrow-label{text-align:center;font-size:0.72rem;color:#525252;font-style:italic;margin-top:2px}
+
+  /* Flow diagram */
+  .flow{max-width:900px;margin:28px auto 0}
+  .flow-title{font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#737373;margin-bottom:14px;text-align:center}
+  .flow-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0}
+  .flow-step{text-align:center;padding:12px 6px;position:relative}
+  .flow-step-icon{font-size:1.6rem;margin-bottom:6px}
+  .flow-step-name{font-size:0.8rem;font-weight:700;margin-bottom:4px}
+  .flow-step-desc{font-size:0.72rem;color:#737373}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#dc2626;padding-top:20px}
+
+  /* Tech stack */
+  .stack{max-width:900px;margin:28px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .stack-card{background:#111;border:1px solid #222;border-radius:10px;padding:16px}
+  .stack-card-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#525252;margin-bottom:10px}
+  .stack-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #1a1a1a;font-size:0.82rem}
+  .stack-item:last-child{border-bottom:none}
+  .stack-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+  /* Section headers */
+  .section-label{text-align:center;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#525252;margin:28px 0 14px}
+
+  /* Footer */
+  .made-with{text-align:center;font-size:12px;color:#525252;margin-top:40px;padding-top:16px;border-top:1px solid #1a1a1a}
+</style>
+</head>
+<body>
+
+<h1>💪 Fitness Buddy</h1>
+<p class="subtitle">Project Architecture · IBM Granite AI · Full-Stack Web App</p>
+
+<div class="arch">
+
+  
+  <div class="layer l-browser">
+    <div class="layer-title">🌐 <span>Layer 1 —</span> Browser / Frontend (Client Side)</div>
+    <div class="files-row">
+      <div class="file-card">
+        <span class="tag tag-html">HTML</span>
+        <div class="file-name">index.html</div>
+        <div class="file-desc">Single-Page App shell. All 8 pages defined here — shown/hidden by JavaScript. Never reloads.</div>
+        <div class="file-lines">📄 366 lines · 8 pages · 1 file</div>
+      </div>
+      <div class="file-card">
+        <span class="tag tag-css">CSS</span>
+        <div class="file-name">style.css</div>
+        <div class="file-desc">Red &amp; Black gym theme. All colours controlled by CSS variables in :root. Fully responsive.</div>
+        <div class="file-lines">🎨 688 lines · 1 variable block controls everything</div>
+      </div>
+      <div class="file-card">
+        <span class="tag tag-js">JavaScript</span>
+        <div class="file-name">app.js</div>
+        <div class="file-desc">All frontend logic — navigation, chat UI, workouts, nutrition, habits, dashboard, AI fallback.</div>
+        <div class="file-lines">⚙️ 780+ lines · No frameworks · Vanilla JS</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(220,38,38,0.07);border-radius:8px;font-size:0.8rem;color:#a3a3a3">
+      <strong style="color:#f87171">What runs here:</strong> Page navigation · User profile form · Chat interface · Workout filter · Habit tracker · Dashboard · localStorage read/write
+    </div>
+  </div>
+
+  
+  <div class="arrow-row"><div style="text-align:center"><div class="arrow-line"></div><div class="arrow-label">POST /api/chat → JSON payload · GET / → HTML · GET /style.css → CSS</div><div class="arrow-line"></div></div></div>
+
+  
+  <div class="layer l-server">
+    <div class="layer-title">🖥️ <span>Layer 2 —</span> Backend Server (Runs on your machine)</div>
+    <div class="files-row">
+      <div class="file-card">
+        <span class="tag tag-py">Python</span>
+        <div class="file-name">app.py</div>
+        <div class="file-desc">Flask server. Serves static files. Proxies IBM Granite requests with IAM auth. Caches tokens.</div>
+        <div class="file-lines">🐍 121 lines · 3 routes: / · /api/chat · /api/health</div>
+      </div>
+      <div class="file-card">
+        <span class="tag tag-js">Node.js</span>
+        <div class="file-name">server.js</div>
+        <div class="file-desc">Alternative Node.js backend. Same job as app.py — use either one, not both.</div>
+        <div class="file-lines">🟢 120 lines · http module · No npm needed</div>
+      </div>
+      <div class="file-card">
+        <span class="tag tag-txt">Text</span>
+        <div class="file-name">requirements.txt</div>
+        <div class="file-desc">Python dependencies for app.py. Install once with pip.</div>
+        <div class="file-lines">📦 3 packages: flask · requests · python-dotenv</div>
+      </div>
+      <div class="file-card">
+        <span class="tag tag-env">Secret</span>
+        <div class="file-name">.env</div>
+        <div class="file-desc">IBM API key, project ID, model ID, endpoint URL. Loaded at startup. Never committed to git.</div>
+        <div class="file-lines">🔐 7 lines · gitignored · env.example is the safe copy</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(22,163,74,0.07);border-radius:8px;font-size:0.8rem;color:#a3a3a3">
+      <strong style="color:#4ade80">Why a backend?</strong> Browsers block direct calls to <code style="color:#fbbf24">iam.cloud.ibm.com</code> (CORS). The server fetches the IAM token server-side, caches it, and forwards requests to IBM Granite securely.
+    </div>
+  </div>
+
+  
+  <div class="arrow-row"><div style="text-align:center"><div class="arrow-line"></div><div class="arrow-label">POST + Bearer token → IBM Granite · POST apikey → IBM IAM</div><div class="arrow-line"></div></div></div>
+
+  
+  <div class="layer l-ibm">
+    <div class="layer-title">☁️ <span>Layer 3 —</span> IBM Cloud (External AI Services)</div>
+    <div class="files-row">
+      <div class="file-card">
+        <span class="tag" style="background:rgba(99,102,241,0.2);color:#818cf8">IBM IAM</span>
+        <div class="file-name">IAM Token Service</div>
+        <div class="file-desc">Exchanges your API key for a short-lived Bearer token (1 hour). Called server-side only.</div>
+        <div class="file-lines">🔑 iam.cloud.ibm.com/identity/token</div>
+      </div>
+      <div class="file-card">
+        <span class="tag" style="background:rgba(99,102,241,0.2);color:#818cf8">IBM Granite</span>
+        <div class="file-name">ibm/granite-4-h-small</div>
+        <div class="file-desc">The AI model that generates all fitness coaching responses, personalised to user profile.</div>
+        <div class="file-lines">🤖 us-south.ml.cloud.ibm.com · Project: db036f3d</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(99,102,241,0.07);border-radius:8px;font-size:0.8rem;color:#a3a3a3">
+      <strong style="color:#818cf8">Model input:</strong> System prompt (with user profile) + chat history → <strong style="color:#818cf8">Model output:</strong> Personalised fitness advice, meal plans, workout routines
+    </div>
+  </div>
+
+  
+  <div class="layer l-storage">
+    <div class="layer-title">💾 <span>Layer 4 —</span> Client Storage (Browser localStorage)</div>
+    <div class="files-row">
+      <div class="file-card">
+        <span class="tag" style="background:rgba(202,138,4,0.2);color:#fbbf24">localStorage</span>
+        <div class="file-name">fb_profile</div>
+        <div class="file-desc">User profile JSON — name, age, goal, level, workout time, food prefs, health notes.</div>
+        <div class="file-lines">👤 Persists across sessions · No login needed</div>
+      </div>
+      <div class="file-card">
+        <span class="tag" style="background:rgba(202,138,4,0.2);color:#fbbf24">localStorage</span>
+        <div class="file-name">fb_habits</div>
+        <div class="file-desc">Daily habit state keyed by date — workout ✓, water intake, meals, sleep hours, steps.</div>
+        <div class="file-lines">📅 Keyed by YYYY-MM-DD · Used for streaks</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(202,138,4,0.07);border-radius:8px;font-size:0.8rem;color:#a3a3a3">
+      <strong style="color:#fbbf24">No database needed.</strong> All user data is stored in the browser. The dashboard and habit streaks read directly from localStorage on every page load.
+    </div>
+  </div>
+
+</div>
+
+
+<p class="section-label">🔄 AI Chat Data Flow</p>
+<div class="flow">
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-step-icon">👤</div>
+      <div class="flow-step-name">User types</div>
+      <div class="flow-step-desc">Message entered in chat textarea</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-icon">⚙️</div>
+      <div class="flow-step-name">app.js</div>
+      <div class="flow-step-desc">Adds system prompt with user profile from localStorage</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-icon">🖥️</div>
+      <div class="flow-step-name">app.py</div>
+      <div class="flow-step-desc">Receives POST /api/chat, fetches cached IAM token</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-icon">🔐</div>
+      <div class="flow-step-name">IBM IAM</div>
+      <div class="flow-step-desc">Returns Bearer token (cached 1 hour)</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-icon">🤖</div>
+      <div class="flow-step-name">IBM Granite</div>
+      <div class="flow-step-desc">Generates personalised AI fitness response</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-icon">💬</div>
+      <div class="flow-step-name">Chat UI</div>
+      <div class="flow-step-desc">Response rendered in chat bubble</div>
+    </div>
+  </div>
+</div>
+
+
+<p class="section-label">🛠️ Technology Stack</p>
+<div class="stack">
+  <div class="stack-card">
+    <div class="stack-card-title">Frontend</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>HTML5 — Structure &amp; SPA pages</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#a78bfa"></span>CSS3 — Responsive theme &amp; animations</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Vanilla JavaScript — No frameworks</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#60a5fa"></span>localStorage — Profile &amp; habits</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#34d399"></span>Google Fonts — Inter typeface</div>
+  </div>
+  <div class="stack-card">
+    <div class="stack-card-title">Backend (Python)</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#4ade80"></span>Flask 3.0 — Web framework</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#4ade80"></span>requests — HTTP to IBM APIs</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#4ade80"></span>python-dotenv — Load .env secrets</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#737373"></span>server.js — Node.js alternative</div>
+  </div>
+  <div class="stack-card">
+    <div class="stack-card-title">IBM Cloud</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#818cf8"></span>IBM Granite 4 (granite-4-h-small)</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#818cf8"></span>IBM watsonx ML endpoint</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#818cf8"></span>IBM IAM token service</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#818cf8"></span>IBM Cloud Lite (free tier)</div>
+  </div>
+  <div class="stack-card">
+    <div class="stack-card-title">App Features (8 pages)</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#dc2626"></span>Home — Landing + feature overview</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#dc2626"></span>Profile — User goals &amp; preferences</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#dc2626"></span>AI Coach — IBM Granite chat</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#dc2626"></span>Workouts · Nutrition · Motivation</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#dc2626"></span>Habits · Dashboard</div>
+  </div>
+</div>
+
+
+<p class="section-label">📁 File Structure</p>
+<div style="max-width:900px;margin:0 auto;background:#111;border:1px solid #222;border-radius:10px;padding:20px;font-family:'Courier New',monospace;font-size:0.82rem;line-height:2">
+  <div style="color:#dc2626;font-weight:700;margin-bottom:4px">fitness-buddy/</div>
+  <div style="padding-left:20px">
+    <div><span style="color:#f87171">├── index.html</span><span style="color:#525252">         ← Frontend shell (all 8 pages)</span></div>
+    <div><span style="color:#a78bfa">├── style.css</span><span style="color:#525252">          ← Red &amp; Black theme</span></div>
+    <div><span style="color:#fbbf24">├── app.js</span><span style="color:#525252">             ← All frontend logic + AI chat</span></div>
+    <div><span style="color:#4ade80">├── app.py</span><span style="color:#525252">             ← Python Flask backend ⭐ RUN THIS</span></div>
+    <div><span style="color:#4ade80">├── requirements.txt</span><span style="color:#525252">   ← pip install -r requirements.txt</span></div>
+    <div><span style="color:#f87171">├── .env</span><span style="color:#525252">               ← 🔐 Secret keys (never share)</span></div>
+    <div><span style="color:#737373">├── env.example</span><span style="color:#525252">        ← Safe template for .env</span></div>
+    <div><span style="color:#737373">└── server.js</span><span style="color:#525252">          ← Node.js alternative backend</span></div>
+  </div>
+</div>
+
+
+<p class="section-label">▶️ How to Run</p>
+<div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+  <div style="background:#111;border:1px solid #222;border-radius:10px;padding:18px">
+    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#4ade80;margin-bottom:10px">🐍 Python (Recommended)</div>
+    <div style="font-family:'Courier New',monospace;font-size:0.8rem;line-height:1.9;color:#d4d4d4">
+      <div><span style="color:#525252">1.</span> cd fitness-buddy</div>
+      <div><span style="color:#525252">2.</span> pip install -r requirements.txt</div>
+      <div><span style="color:#525252">3.</span> python app.py</div>
+      <div><span style="color:#525252">4.</span> <span style="color:#fbbf24">http://localhost:3000</span></div>
+    </div>
+  </div>
+  <div style="background:#111;border:1px solid #222;border-radius:10px;padding:18px">
+    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#818cf8;margin-bottom:10px">🟢 Node.js (Alternative)</div>
+    <div style="font-family:'Courier New',monospace;font-size:0.8rem;line-height:1.9;color:#d4d4d4">
+      <div><span style="color:#525252">1.</span> cd fitness-buddy</div>
+      <div><span style="color:#525252">2.</span> <span style="color:#737373">(no install needed)</span></div>
+      <div><span style="color:#525252">3.</span> node server.js</div>
+      <div><span style="color:#525252">4.</span> <span style="color:#fbbf24">http://localhost:3000</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="made-with">Made with IBM Bob</div>
+</body>
+</html>

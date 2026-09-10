@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Buddy – Your Personal AI Fitness & Wellness Coach</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────────────── -->
+<header class="navbar" id="navbar">
+  <div class="nav-brand">
+    <span class="brand-icon">💪</span>
+    <span class="brand-name">Fitness Buddy</span>
+  </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="#home"      class="nav-link active" data-page="home">Home</a>
+    <a href="#profile"   class="nav-link" data-page="profile">Profile</a>
+    <a href="#assistant" class="nav-link" data-page="assistant">AI Coach</a>
+    <a href="#workouts"  class="nav-link" data-page="workouts">Workouts</a>
+    <a href="#nutrition" class="nav-link" data-page="nutrition">Nutrition</a>
+    <a href="#motivation"class="nav-link" data-page="motivation">Motivation</a>
+    <a href="#habits"    class="nav-link" data-page="habits">Habits</a>
+    <a href="#dashboard" class="nav-link" data-page="dashboard">Dashboard</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+</header>
+
+<!-- ── HOME ───────────────────────────────────────────────────── -->
+<section class="page active" id="home">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🤖 Powered by IBM Granite AI</div>
+      <h1 class="hero-title">Fitness Buddy</h1>
+      <p class="hero-tagline">Your Personal AI Fitness &amp; Wellness Coach</p>
+      <p class="hero-desc">Personalized workouts, smart nutrition, daily motivation, and habit tracking — all in one place, powered by IBM Granite AI.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" onclick="navigateTo('profile')">🚀 Start Your Fitness Journey</button>
+        <button class="btn btn-outline btn-lg" onclick="navigateTo('assistant')">💬 Chat with AI Coach</button>
+      </div>
+      <p class="disclaimer">⚕️ <em>Fitness Buddy provides general wellness information and is <strong>not a replacement for a doctor, dietitian, or professional medical advice</strong>.</em></p>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="float-card fc1">🏋️ Strength Training</div>
+        <div class="float-card fc2">🥗 Nutrition Plans</div>
+        <div class="float-card fc3">🎯 Goal Tracking</div>
+        <div class="float-card fc4">🧘 Mindfulness</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-grid container">
+    <div class="feature-card">
+      <div class="feature-icon">🏃</div>
+      <h3>Smart Workouts</h3>
+      <p>AI-curated routines for every fitness level — beginner to advanced — tailored to your goals and available time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🥦</div>
+      <h3>Nutrition Guidance</h3>
+      <p>Balanced meal ideas for breakfast, lunch, dinner, and snacks that match your food preferences.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <h3>Daily Motivation</h3>
+      <p>Fresh motivational quotes and actionable daily challenges to keep you moving forward every single day.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Habit Tracker</h3>
+      <p>Build lasting habits with a simple tracker for workouts, water, meals, sleep, and steps.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>IBM Granite AI</h3>
+      <p>Your 24/7 AI fitness coach powered by IBM Granite — ask anything about fitness, nutrition, and wellness.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>Fully Responsive</h3>
+      <p>Seamless experience on desktop, tablet, and mobile so you can access your coach anywhere.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROFILE ─────────────────────────────────────────────────── -->
+<section class="page" id="profile">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>👤 Your Profile</h2>
+      <p>Tell us about yourself so we can personalise your fitness journey.</p>
+    </div>
+    <form class="profile-form card" id="profileForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="p-name" placeholder="e.g. Alex Johnson" />
+        </div>
+        <div class="form-group">
+          <label>Age</label>
+          <input type="number" id="p-age" placeholder="e.g. 28" min="10" max="100" />
+        </div>
+        <div class="form-group">
+          <label>Fitness Goal</label>
+          <select id="p-goal">
+            <option value="">Select goal…</option>
+            <option value="weight_loss">Weight Management</option>
+            <option value="muscle">Muscle Building</option>
+            <option value="general">General Fitness</option>
+            <option value="flexibility">Flexibility</option>
+            <option value="stamina">Improve Stamina</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fitness Level</label>
+          <select id="p-level">
+            <option value="">Select level…</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Available Workout Time (min/day)</label>
+          <select id="p-time">
+            <option value="">Select time…</option>
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="60">60 minutes</option>
+            <option value="90">90+ minutes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Preferred Workout Type</label>
+          <select id="p-workout-type">
+            <option value="">Select type…</option>
+            <option value="home">Home Workouts</option>
+            <option value="gym">Gym Training</option>
+            <option value="outdoor">Outdoor / Running</option>
+            <option value="yoga">Yoga / Pilates</option>
+            <option value="hiit">HIIT</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>Food Preferences / Restrictions</label>
+          <input type="text" id="p-food" placeholder="e.g. vegetarian, no dairy, gluten-free…" />
+        </div>
+        <div class="form-group full-width">
+          <label>Health Notes (optional)</label>
+          <input type="text" id="p-health" placeholder="e.g. bad knees, lower back pain…" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">💾 Save Profile</button>
+    </form>
+    <div class="profile-saved card hidden" id="profileSaved">
+      <div class="success-banner">✅ Profile saved! Your AI coach is now personalised for you.</div>
+      <div id="profileSummary"></div>
+      <button class="btn btn-primary" onclick="navigateTo('dashboard')">🏠 Go to Dashboard</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── AI ASSISTANT ────────────────────────────────────────────── -->
+<section class="page" id="assistant">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>🤖 AI Fitness Coach</h2>
+      <p>Powered by <strong>IBM Granite AI</strong> — ask anything about workouts, nutrition, motivation, or healthy living.</p>
+    </div>
+    <div class="chat-wrapper card">
+      <div class="chat-header">
+        <span class="ai-avatar">🤖</span>
+        <div>
+          <strong>Fitness Buddy AI</strong>
+          <span class="ai-model">IBM Granite · ibm/granite-4-h-small</span>
+        </div>
+        <span class="online-dot" title="Online"></span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg ai-msg">
+          <span class="msg-avatar">🤖</span>
+          <div class="msg-bubble">
+            Hey! I'm your AI Fitness Coach powered by IBM Granite. 💪<br/><br/>
+            I can help you with:<br/>
+            • <strong>Workout routines</strong> for any goal or level<br/>
+            • <strong>Nutrition tips</strong> &amp; meal ideas<br/>
+            • <strong>Motivation</strong> &amp; mental fitness<br/>
+            • <strong>Habit-building</strong> strategies<br/><br/>
+            What would you like to work on today?
+          </div>
+        </div>
+      </div>
+      <div class="chat-suggestions">
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">🏋️ Beginner home workout</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">🥗 Healthy breakfast ideas</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">🔥 Burn fat fast tips</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">💪 Build muscle plan</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">🧘 Stress relief exercises</button>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="chatInput" rows="1" placeholder="Ask your fitness coach anything…" onkeydown="handleChatKey(event)"></textarea>
+        <button class="btn btn-primary send-btn" id="sendBtn" onclick="sendMessage()">Send ➤</button>
+      </div>
+    </div>
+    <p class="disclaimer-small">⚕️ This AI provides general fitness information only. Consult a qualified professional for medical or dietary advice.</p>
+  </div>
+</section>
+
+<!-- ── WORKOUTS ────────────────────────────────────────────────── -->
+<section class="page" id="workouts">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>🏋️ Workout Plans</h2>
+      <p>Structured routines for every level and goal.</p>
+    </div>
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label>Level:</label>
+        <button class="filter-btn active" data-filter="level" data-value="all">All</button>
+        <button class="filter-btn" data-filter="level" data-value="beginner">Beginner</button>
+        <button class="filter-btn" data-filter="level" data-value="intermediate">Intermediate</button>
+        <button class="filter-btn" data-filter="level" data-value="advanced">Advanced</button>
+      </div>
+      <div class="filter-group">
+        <label>Goal:</label>
+        <button class="filter-btn active" data-filter="goal" data-value="all">All</button>
+        <button class="filter-btn" data-filter="goal" data-value="weight_loss">Weight Loss</button>
+        <button class="filter-btn" data-filter="goal" data-value="muscle">Muscle</button>
+        <button class="filter-btn" data-filter="goal" data-value="general">General</button>
+        <button class="filter-btn" data-filter="goal" data-value="flexibility">Flexibility</button>
+        <button class="filter-btn" data-filter="goal" data-value="stamina">Stamina</button>
+      </div>
+    </div>
+    <div class="workouts-grid" id="workoutsGrid"></div>
+  </div>
+</section>
+
+<!-- ── NUTRITION ───────────────────────────────────────────────── -->
+<section class="page" id="nutrition">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>🥗 Nutrition Guide</h2>
+      <p>Simple, healthy meal ideas to fuel your fitness journey.</p>
+    </div>
+    <div class="meal-tabs">
+      <button class="meal-tab active" data-meal="breakfast">🌅 Breakfast</button>
+      <button class="meal-tab" data-meal="lunch">☀️ Lunch</button>
+      <button class="meal-tab" data-meal="dinner">🌙 Dinner</button>
+      <button class="meal-tab" data-meal="snacks">🍎 Snacks</button>
+    </div>
+    <div class="meals-grid" id="mealsGrid"></div>
+    <div class="nutrition-tips card">
+      <h3>💡 Nutrition Essentials</h3>
+      <ul class="tips-list">
+        <li>🥤 Drink at least 8 glasses of water daily</li>
+        <li>🎨 Eat a rainbow of colourful vegetables</li>
+        <li>🥩 Include lean protein in every meal</li>
+        <li>🌾 Choose whole grains over refined carbs</li>
+        <li>⏰ Don't skip breakfast — fuel your morning</li>
+        <li>🍽️ Eat smaller, more frequent meals to stabilise energy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── MOTIVATION ─────────────────────────────────────────────── -->
+<section class="page" id="motivation">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>🔥 Daily Motivation</h2>
+      <p>Your daily dose of inspiration to keep moving forward.</p>
+    </div>
+    <div class="quote-card card" id="quoteCard">
+      <div class="quote-marks">"</div>
+      <p class="quote-text" id="quoteText">Loading your daily inspiration…</p>
+      <p class="quote-author" id="quoteAuthor"></p>
+      <button class="btn btn-outline" onclick="loadNewQuote()">🔄 New Quote</button>
+    </div>
+    <div class="daily-challenge card" id="dailyChallenge">
+      <h3>🎯 Today's Challenge</h3>
+      <p id="challengeText">Loading challenge…</p>
+    </div>
+    <div class="tips-grid" id="fitnessTipsGrid"></div>
+  </div>
+</section>
+
+<!-- ── HABITS ─────────────────────────────────────────────────── -->
+<section class="page" id="habits">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>📋 Habit Tracker</h2>
+      <p>Build healthy habits one day at a time.</p>
+    </div>
+    <div class="habit-date card">
+      <strong>📅 Today:</strong> <span id="todayDate"></span>
+    </div>
+    <div class="habits-grid" id="habitsGrid"></div>
+    <div class="habit-summary card" id="habitSummary">
+      <h3>📊 Today's Progress</h3>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="habitProgressFill" style="width:0%"></div>
+      </div>
+      <p id="habitProgressText">Complete habits to see your progress!</p>
+    </div>
+    <div class="streak-card card">
+      <h3>🔥 Streaks</h3>
+      <div id="streaksDisplay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DASHBOARD ───────────────────────────────────────────────── -->
+<section class="page" id="dashboard">
+  <div class="container page-content">
+    <div class="page-header">
+      <h2>🏠 Dashboard</h2>
+      <p id="dashboardGreeting">Welcome to Fitness Buddy!</p>
+    </div>
+    <div class="dashboard-grid">
+      <div class="dash-card card" id="dashWorkout">
+        <div class="dash-card-header">🏋️ Today's Workout</div>
+        <div class="dash-card-body" id="dashWorkoutBody">Save your profile to see your personalised workout.</div>
+      </div>
+      <div class="dash-card card" id="dashMotivation">
+        <div class="dash-card-header">🔥 Daily Motivation</div>
+        <div class="dash-card-body" id="dashMotivationBody">Loading…</div>
+      </div>
+      <div class="dash-card card" id="dashMeal">
+        <div class="dash-card-header">🥗 Recommended Meal</div>
+        <div class="dash-card-body" id="dashMealBody">Loading…</div>
+      </div>
+      <div class="dash-card card" id="dashHabits">
+        <div class="dash-card-header">📋 Habit Progress</div>
+        <div class="dash-card-body" id="dashHabitsBody">
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="dashHabitFill" style="width:0%"></div>
+          </div>
+          <p id="dashHabitText">No habits tracked yet.</p>
+        </div>
+      </div>
+      <div class="dash-card card" id="dashGoal">
+        <div class="dash-card-header">🎯 Fitness Goal</div>
+        <div class="dash-card-body" id="dashGoalBody">Set your profile to track your goal.</div>
+      </div>
+      <div class="dash-card card" id="dashStats">
+        <div class="dash-card-header">📈 Quick Stats</div>
+        <div class="dash-card-body" id="dashStatsBody"></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="navigateTo('assistant')">💬 Chat with AI Coach</button>
+  </div>
+</section>
+
+<footer class="app-footer">
+  <p>💪 <strong>Fitness Buddy</strong> · Powered by <strong>IBM Granite AI</strong> · IBM Cloud Lite</p>
+  <p class="footer-disclaimer">⚕️ Fitness Buddy provides general wellness information only and is not a substitute for professional medical, nutritional, or fitness advice. Always consult a qualified professional before starting a new fitness or diet programme.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
